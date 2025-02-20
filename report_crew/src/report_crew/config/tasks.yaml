@@ -1,0 +1,56 @@
+ingest_report_task:
+  description: >
+    Extract text from a cybersecurity report, which can be in HTML, PDF, or from an API.
+    Ensure the content is clean and well-structured for further analysis.
+    Identify the source, which can be "pdf", "html" or "api", and use it with the tools like this
+    report_source: {report_source}
+    source_type: your_chosen_source_type
+
+  expected_output: >
+    A cleaned text version of the report, ready for cybersecurity analysis.
+  agent: data_ingestion_agent
+
+extract_threats_task:
+  description: >
+    Analyze the extracted cybersecurity report and identify all threats.
+    
+    Your analysis should include:
+    - **Known threats** (e.g., CVEs, MITRE ATT&CK techniques, malware names, hacker groups)
+    - **Emerging threats** (anything new or suspicious that is not widely documented yet)
+    - **Any new vulnerabilities, exploits, or attack methods**
+    
+    Format your response as a **valid JSON**:
+
+    If you find **no new threats**, clearly state: `"No emerging threats detected."`
+  expected_output: >
+    A structured JSON object containing identified cybersecurity threats.
+  agent: cybersecurity_analysis_agent
+  context:
+    - ingest_report_task
+
+store_threats_task:
+  description: >
+    Store the extracted cybersecurity intelligence in ChromaDB for future retrieval.
+    Ensure the data is well-indexed and can be searched later.
+    Use the tool with the data given to you by extract_threats_task.
+  expected_output: >
+    Data successfully stored in ChromaDB.
+  agent: database_manager_agent
+  context:
+    - extract_threats_task
+
+generate_summary_task:
+  description: >
+    Review the structured JSON data containing KnownThreats and EmergingThreats.
+    Create a **short summary** in Markdown format, highlighting key threats.
+    Save the summary in the "threats/" folder with a unique filename based on the current timestamp.
+  
+  expected_output: >
+    A Markdown file stored in the threats folder, containing:
+    - A brief overview of KnownThreats
+    - A brief overview of EmergingThreats
+    - A timestamped filename
+  agent: summary_generator
+  context:
+    - extract_threats_task
+
