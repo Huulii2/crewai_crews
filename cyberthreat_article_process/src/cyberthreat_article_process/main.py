@@ -11,7 +11,7 @@ from cyberthreat_article_process.crews.is_report_worth_processing.is_report_wort
 from cyberthreat_article_process.crews.report_processing.report_processing import ReportProcessing
 
 
-class PoemFlow(Flow):
+class CyberThreatFlow(Flow):
     START_URL = "https://krebsonsecurity.com/"
     scraper = CyberThreatScraper(start_url=START_URL)
     
@@ -41,12 +41,12 @@ class PoemFlow(Flow):
 
 
 def kickoff():
-    poem_flow = PoemFlow()
+    poem_flow = CyberThreatFlow()
     poem_flow.kickoff()
 
 
 def plot():
-    poem_flow = PoemFlow()
+    poem_flow = CyberThreatFlow()
     poem_flow.plot()
 
 
