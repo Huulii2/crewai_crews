@@ -15,7 +15,7 @@ import requests_cache
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-class CyberThreatScraper:
+class CyberThreatCrawler:
     def __init__(self, start_url, db_path="./db/cyberthreat_reports", max_pages=7, max_workers=10):
         self.start_url = start_url
         self.max_pages = max_pages

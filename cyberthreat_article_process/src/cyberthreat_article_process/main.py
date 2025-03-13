@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 from crewai.flow import Flow, listen, start
 
-from cyberthreat_article_process.scraper.cyber_threat_scaper import CyberThreatScraper
+from cyberthreat_article_process.crawler.cyber_threat_crawler import CyberThreatCrawler
 
 from cyberthreat_article_process.crews.is_report_worth_processing.is_report_worth_processing import IsReportWorthProcessing
 from cyberthreat_article_process.crews.report_processing.report_processing import ReportProcessing
@@ -13,7 +13,7 @@ from cyberthreat_article_process.crews.report_processing.report_processing impor
 
 class CyberThreatFlow(Flow):
     START_URL = "https://krebsonsecurity.com/"
-    scraper = CyberThreatScraper(start_url=START_URL)
+    scraper = CyberThreatCrawler(start_url=START_URL)
     
 
     @start()
