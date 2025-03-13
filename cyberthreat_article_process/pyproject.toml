@@ -1,0 +1,20 @@
+[project]
+name = "cyberthreat_article_process"
+version = "0.1.0"
+description = "cyberthreat_article_process using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.100.1,<1.0.0",
+]
+
+[project.scripts]
+kickoff = "cyberthreat_article_process.main:kickoff"
+plot = "cyberthreat_article_process.main:plot"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "flow"

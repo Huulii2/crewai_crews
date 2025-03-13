@@ -1,0 +1,6 @@
+evaluation_task :
+  description: >
+    Read the cybersecurity report and decide if it should be processed. Respond with 'Approved' or 'Rejected'.
+  expected_output: >
+   Either 'Approved' or 'Rejected'.
+  agent: evaluator_agent
